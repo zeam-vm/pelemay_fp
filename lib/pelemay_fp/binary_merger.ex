@@ -1,11 +1,11 @@
 defmodule PelemayFp.BinaryMerger do
   @moduledoc """
-  Insert a given consecutive a list of tuples of a `Range`, count and a list
+  Insert a given consecutive list of tuples of a `Range`, count and a list
   into another one.
   """
 
   @doc """
-  Insert a given consecutive a list of tuples of a `Range`, count and a list
+  Insert a given consecutive list of tuples of a `Range`, count and a list
   into another one.
 
   ## Examples

@@ -1,12 +1,12 @@
 defmodule PelemayFp.Merger do
   @moduledoc """
-  Merges two consecutive a list of tuples of a `Range`, count and a list.
+  Merges two consecutive list of tuples of a `Range`, count and a list.
   """
 
   @type t :: list({Range.t(), non_neg_integer, list})
 
   @doc """
-  Merges two consecutive a list of tuples of a `Range`, count and a list.
+  Merges two consecutive list of tuples of a `Range`, count and a list.
 
   ## Examples
 
