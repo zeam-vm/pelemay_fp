@@ -26,6 +26,12 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/pelemay_fp](https://hexdocs.pm/pelemay_fp).
 
+## Acknowledgement
+
+This research is supported by Adaptable and Seamless Technology transfer
+Program through Target-driven R&D (A-STEP) from Japan Science and Technology
+Agency (JST) Grant Number JPMJTM20H1.
+
 ## License
 
 Copyright 2020 Susumu Yamazaki
