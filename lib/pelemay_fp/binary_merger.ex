@@ -1,9 +1,13 @@
 defmodule PelemayFp.BinaryMerger do
   @moduledoc """
-  Documentation for `BinaryMerger`.
+  Insert a given consecutive a list of tuples of a `Range`, count and a list
+  into another one.
   """
 
   @doc """
+  Insert a given consecutive a list of tuples of a `Range`, count and a list
+  into another one.
+
   ## Examples
 
   iex> PelemayFp.BinaryMerger.insert([{1..2, 2, [1, 2]}], [{5..6, 2, [5, 6]}])
