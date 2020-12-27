@@ -11,8 +11,7 @@ list
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `pelemay_fp` to your list of dependencies in `mix.exs`:
+PelemayFp supports only Elixir v1.10 and Erlang/OTP 23+, currently, due to saving our testing efforts. It can be installed by adding `pelemay_fp` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -22,9 +21,7 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/pelemay_fp](https://hexdocs.pm/pelemay_fp).
+The docs can be found at [https://hexdocs.pm/pelemay_fp](https://hexdocs.pm/pelemay_fp).
 
 ## Acknowledgement
 
