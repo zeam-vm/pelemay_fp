@@ -30,13 +30,13 @@ We conducted performance evaluation of PelemayFp, Pelemay, Flow, Enum and Pmap o
 ```
 ## PelemayFpBench
 benchmark name          iterations   average time 
-PelemayFp                      200   10177.85 µs/op
-Pelemay                        100   16762.24 µs/op
-PelemayFp and Pelemay          100   18532.70 µs/op
-Flow (without sorting)         100   18731.43 µs/op
-Enum                            50   31283.36 µs/op
-Flow (with sorting)             10   105091.00 µs/op
-Pmap                             1   1213749.00 µs/op
+PelemayFp                      100   13917.93 µs/op
+Pelemay                        100   16863.28 µs/op
+PelemayFp and Pelemay          100   19023.99 µs/op
+Flow (without sorting)         100   19564.43 µs/op
+Enum                            50   31487.56 µs/op
+Flow (with sorting)             10   108537.60 µs/op
+Pmap                             2   864994.50 µs/op
 ```
 
 The source code of the benchmarks is here: https://github.com/zeam-vm/pelemay_fp_benchmark
