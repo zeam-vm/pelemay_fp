@@ -21,8 +21,8 @@ defmodule PelemayFp do
 
   ## Examples
 
-  iex> PelemayFp.map(1..3, & &1 * 2)
-  [2, 4, 6]
+      iex> PelemayFp.map(1..3, & &1 * 2)
+      [2, 4, 6]
   """
   @spec map(Enum.t(), (Enum.element() -> any()), pos_integer()) :: list()
   def map(enumerable, fun, threshold \\ 12000) do
@@ -58,8 +58,8 @@ defmodule PelemayFp do
 
   ## Examples
 
-  iex> PelemayFp.map_chunk(1..3, & &1 * 2, fn x -> Enum.map(x, & &1 * 2) end)
-  [2, 4, 6]
+      iex> PelemayFp.map_chunk(1..3, & &1 * 2, fn x -> Enum.map(x, & &1 * 2) end)
+      [2, 4, 6]
   """
   @spec map_chunk(Enum.t(), (Enum.element() -> any()), (Enum.t() -> Enum.t()), pos_integer()) ::
           list()

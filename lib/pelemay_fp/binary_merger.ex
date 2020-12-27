@@ -10,11 +10,11 @@ defmodule PelemayFp.BinaryMerger do
 
   ## Examples
 
-  iex> PelemayFp.BinaryMerger.insert([{1..2, 2, [1, 2]}], [{5..6, 2, [5, 6]}])
-  [{1..2, 2, [1, 2]}, {5..6, 2, [5, 6]}]
+      iex> PelemayFp.BinaryMerger.insert([{1..2, 2, [1, 2]}], [{5..6, 2, [5, 6]}])
+      [{1..2, 2, [1, 2]}, {5..6, 2, [5, 6]}]
 
-  iex> PelemayFp.BinaryMerger.insert([{1..2, 2, [1, 2]}, {5..6, 2, [5, 6]}], [{3..4, 2, [3, 4]}])
-  [{1..6, 6, [1, 2, 3, 4, 5, 6]}]  
+      iex> PelemayFp.BinaryMerger.insert([{1..2, 2, [1, 2]}, {5..6, 2, [5, 6]}], [{3..4, 2, [3, 4]}])
+      [{1..6, 6, [1, 2, 3, 4, 5, 6]}]  
 
   """
   @spec insert(
