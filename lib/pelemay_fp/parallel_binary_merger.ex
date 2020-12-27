@@ -1,10 +1,16 @@
 defmodule PelemayFp.ParallelBinaryMerger do
   @moduledoc """
-  Documentation for `ParallelBinaryMerger`.
+  Receives a given consecutive list of tuples of a `Range`, count and a list,
+  or an exit or dying message from the monitored process and merges it into a result,
+  and send it.
   """
 
   @doc """
-  Documentation for `receive_insert_fun`.
+  Receives a given consecutive list of tuples of a `Range`, count and a list,
+  or an exit or dying message from the monitored process and merges it into a result,
+  and send it.
+
+  When the monitored process dies abnormally, the `fallback` function will be invoked.
   """
   @spec receive_insert_fun(
           pid,
@@ -18,7 +24,9 @@ defmodule PelemayFp.ParallelBinaryMerger do
   end
 
   @doc """
-  Documentation for `receive_insert`.
+  Receives a given consecutive list of tuples of a `Range`, count and a list,
+  or an exit or dying message from the monitored process and merges it into a result,
+  and send it.
   """
   @spec receive_insert(pid, Range.t() | list(integer()) | PelemayFp.ParallelSplitter.t()) ::
           PelemayFp.Merger.t()
