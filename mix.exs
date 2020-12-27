@@ -13,7 +13,17 @@ defmodule PelemayFp.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       dialyzer: [plt_add_deps: :transitive],
-      elixirc_paths: elixirc_paths(Mix.env())
+      elixirc_paths: elixirc_paths(Mix.env()),
+
+      # Docs
+      name: "PelemayFp",
+      docs: [
+        main: "PelemayFp",
+        source_url: "https://github.com/zeam-vm/pelemay_fp",
+        source_ref: "v#{@version}",
+        logo: "logo/Pelemay.png",
+        extras: ["README.md"]
+      ]
     ]
   end
 
@@ -28,7 +38,8 @@ defmodule PelemayFp.MixProject do
   defp deps do
     [
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
-      {:git_hooks, "~> 0.5.1", only: [:test, :dev], runtime: false}
+      {:git_hooks, "~> 0.5.1", only: [:test, :dev], runtime: false},
+      {:ex_doc, "~> 0.23", only: :dev, runtime: false}
     ]
   end
 
