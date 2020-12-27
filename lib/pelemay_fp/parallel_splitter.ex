@@ -1,6 +1,10 @@
 defmodule PelemayFp.ParallelSplitter do
   @moduledoc """
-  Documentation for `ParallelSplitter`.
+  Provides the `split` function that divides a given `enumerable` 
+  into a chunk list whose size equals to or is less than the given `threshold`, 
+  with spawing each process corresponding to the chunk list,
+  and the `range` function that returns the range from the number of the chunk
+  minus 1 to 0.
   """
 
   @type t :: [{pid(), non_neg_integer()} | {{pid(), reference()}, non_neg_integer()}]
