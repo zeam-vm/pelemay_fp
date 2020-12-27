@@ -1,12 +1,12 @@
 # PelemayFp
 
-**Pelemay Fast Pmap**: provides fast `pmap` (Parallel `map` function), similar to the `Enum` module, although computations will be executed in parallel using `Process.spawn/4`.
+**Pelemay Fast Parallel map**: provides fast Parallel `map` function, similar to the `Enum` module, although computations will be executed in parallel using `Process.spawn/4`.
 
 Here is a quick example on how to calculate the square of each element with PelemayFp:
 
 ```elixir
 list
-|> PelemayFp.pmap(& &1 * &1)
+|> PelemayFp.map(& &1 * &1)
 ```
 
 ## Installation

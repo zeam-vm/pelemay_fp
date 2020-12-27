@@ -11,7 +11,19 @@ defmodule PelemayFp.MixProject do
       package: package(),
       description: "Fast parallel map function for Elixir",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      dialyzer: [plt_add_deps: :transitive],
+      elixirc_paths: elixirc_paths(Mix.env()),
+
+      # Docs
+      name: "PelemayFp",
+      docs: [
+        main: "PelemayFp",
+        source_url: "https://github.com/zeam-vm/pelemay_fp",
+        source_ref: "v#{@version}",
+        logo: "logo/Pelemay.png",
+        extras: ["README.md"]
+      ]
     ]
   end
 
@@ -25,8 +37,9 @@ defmodule PelemayFp.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
+      {:git_hooks, "~> 0.5.1", only: [:test, :dev], runtime: false},
+      {:ex_doc, "~> 0.23", only: :dev, runtime: false}
     ]
   end
 
@@ -37,4 +50,7 @@ defmodule PelemayFp.MixProject do
       links: %{"GitHub" => "https://github.com/zeam-vm/pelemay_fp"}
     }
   end
+
+  defp elixirc_paths(:test), do: ["lib", "test/pelemay_fp/support"]
+  defp elixirc_paths(_), do: ["lib"]
 end
