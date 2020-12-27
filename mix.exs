@@ -12,7 +12,8 @@ defmodule PelemayFp.MixProject do
       description: "Fast parallel map function for Elixir",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      dialyzer: [plt_add_deps: :transitive]
+      dialyzer: [plt_add_deps: :transitive],
+      elixirc_paths: elixirc_paths(Mix.env())
     ]
   end
 
@@ -38,4 +39,7 @@ defmodule PelemayFp.MixProject do
       links: %{"GitHub" => "https://github.com/zeam-vm/pelemay_fp"}
     }
   end
+
+  defp elixirc_paths(:test), do: ["lib", "test/pelemay_fp/support"]
+  defp elixirc_paths(_), do: ["lib"]
 end
