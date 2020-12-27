@@ -26,10 +26,12 @@ defmodule PelemayFp do
   """
   @spec map(Enum.t(), (Enum.element() -> any()), pos_integer()) :: list()
   def map(enumerable, fun, threshold \\ 12000) do
+    pid = spawn(PelemayFp.Sub, :receive_result, [self()])
+
     p_list =
       PelemayFp.ParallelSplitter.split(
         {PelemayFp.Sub, :sub_enum},
-        self(),
+        pid,
         0,
         enumerable,
         threshold,
@@ -37,14 +39,12 @@ defmodule PelemayFp do
         [:monitor]
       )
 
-    [{_from.._to, _count, result}] =
-      PelemayFp.ParallelBinaryMerger.receive_insert_fun(
-        self(),
-        p_list,
-        fallback(enumerable, threshold, fun)
-      )
+    send(pid, {:p_list, p_list})
 
-    result
+    receive do
+      {:ok, result} -> result
+      :error -> Enum.map(enumerable, fun)
+    end
   end
 
   @doc """
@@ -64,24 +64,24 @@ defmodule PelemayFp do
   @spec map_chunk(Enum.t(), (Enum.element() -> any()), (Enum.t() -> Enum.t()), pos_integer()) ::
           list()
   def map_chunk(enumerable, fun, chunk_fun, threshold \\ 12000) do
+    pid = spawn(PelemayFp.Sub, :receive_result, [self()])
+
     p_list =
       PelemayFp.ParallelSplitter.split(
         {PelemayFp.Sub, :sub_chunk},
-        self(),
+        pid,
         0,
         enumerable,
         threshold,
-        chunk_fun,
+        {chunk_fun, fallback(enumerable, threshold, fun)},
         [:monitor]
       )
 
-    case PelemayFp.ParallelBinaryMerger.receive_insert_fun(
-           self(),
-           p_list,
-           fallback(enumerable, threshold, fun)
-         ) do
-      [{_from.._to, _count, result}] -> result
-      _ -> Enum.map(enumerable, fun)
+    send(pid, {:p_list, p_list})
+
+    receive do
+      {:ok, result} -> result
+      :error -> Enum.map(enumerable, fun)
     end
   end
 

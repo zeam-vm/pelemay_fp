@@ -10,4 +10,9 @@ defmodule PelemayFpTest do
     assert PelemayFp.map_chunk(1..100, &(&1 * 2), fn x -> Enum.map(x, &(&1 * 2)) end, 10) ==
              Enum.map(1..100, &(&1 * 2))
   end
+
+  test "Get different results" do
+    assert PelemayFp.map(1..10, &(&1 * &1)) == Enum.map(1..10, &(&1 * &1))
+    assert PelemayFp.map(1..10, &(&1 + &1)) == Enum.map(1..10, &(&1 + &1))
+  end
 end

@@ -9,24 +9,6 @@ defmodule PelemayFp.ParallelBinaryMerger do
   Receives a given consecutive list of tuples of a `Range`, count and a list,
   or an exit or dying message from the monitored process and merges it into a result,
   and send it.
-
-  When the monitored process dies abnormally, the `fallback` function will be invoked.
-  """
-  @spec receive_insert_fun(
-          pid,
-          list(PelemayFp.ParallelSplitter.t()),
-          (non_neg_integer() -> list())
-        ) ::
-          PelemayFp.Merger.t()
-  def receive_insert_fun(pid, list, fallback) do
-    result = receive_insert_sub_fun(list, [], fallback)
-    send(pid, result)
-  end
-
-  @doc """
-  Receives a given consecutive list of tuples of a `Range`, count and a list,
-  or an exit or dying message from the monitored process and merges it into a result,
-  and send it.
   """
   @spec receive_insert(pid, Range.t() | list(integer()) | PelemayFp.ParallelSplitter.t()) ::
           PelemayFp.Merger.t()
@@ -49,49 +31,13 @@ defmodule PelemayFp.ParallelBinaryMerger do
         receive_insert_sub(list, result)
 
       l = [{_from.._to, _count, _fragment} | _tail] ->
-        r = PelemayFp.BinaryMerger.insert(result, l)
-        receive_insert_sub(remove(list, l), r)
+        receive_insert_sub(
+          remove(list, l),
+          PelemayFp.BinaryMerger.insert(result, l)
+        )
 
       {:DOWN, _ref, :process, _pid, :normal} ->
         receive_insert_sub(list, result)
-    after
-      500 ->
-        result
-        # raise(
-        #   "Timeout list = #{inspect(list, charlists: :as_lists)}, result = #{inspect(result)}"
-        # )
-    end
-  end
-
-  defp receive_insert_sub_fun([], result, _) do
-    result
-  end
-
-  defp receive_insert_sub_fun(list, result, fallback) do
-    receive do
-      [] ->
-        receive_insert_sub_fun(list, result, fallback)
-
-      l = [{_from.._to, _count, _fragment} | _tail] ->
-        r = PelemayFp.BinaryMerger.insert(result, l)
-        receive_insert_sub_fun(remove(list, l), r, fallback)
-
-      {:DOWN, _ref, :process, _pid, :normal} ->
-        receive_insert_sub_fun(list, result, fallback)
-
-      {:DOWN, _ref, :process, pid, _} ->
-        {_, id} =
-          Enum.find(
-            list,
-            fn
-              {{opid, _ref}, _id} -> pid == opid
-              {opid, _id} -> pid == opid
-            end
-          )
-
-        fragment = fallback.(id)
-        send(self(), [{id..id, Enum.count(fragment), fragment}])
-        receive_insert_sub_fun(list, result, fallback)
     after
       500 ->
         result
