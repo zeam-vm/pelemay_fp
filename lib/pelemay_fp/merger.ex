@@ -3,9 +3,6 @@ defmodule PelemayFp.Merger do
   Merges two consecutive list of tuples of a `Range`, count and a list.
   """
 
-  @doc """
-  A consecutive list of tuples of a `Range`, count and a list.
-  """
   @type t :: list({Range.t(), non_neg_integer, list})
 
   @doc """
