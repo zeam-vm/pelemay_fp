@@ -26,7 +26,8 @@ defmodule PelemayFp.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:dialyxir, "~> 1.0", only: [:dev], runtime: false}
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
+      {:git_hooks, "~> 0.5.1", only: [:test, :dev], runtime: false}
     ]
   end
 
