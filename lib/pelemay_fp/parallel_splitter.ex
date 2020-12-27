@@ -41,6 +41,7 @@ defmodule PelemayFp.ParallelSplitter do
   end
 
   @doc """
+  Returns the range from the number of the chunk minus 1 to 0.
   """
   @spec range(Enum.t(), pos_integer()) :: Range.t()
   def range(collection, threshold) do
