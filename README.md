@@ -23,6 +23,25 @@ end
 
 The docs can be found at [https://hexdocs.pm/pelemay_fp](https://hexdocs.pm/pelemay_fp).
 
+## Performance
+
+We conducted performance evaluation of PelemayFp, Pelemay, Flow, Enum and Pmap on iMac Pro (2017):
+
+```
+## PelemayFpBench
+benchmark name          iterations   average time 
+PelemayFp                      200   10177.85 µs/op
+Pelemay                        100   16762.24 µs/op
+PelemayFp and Pelemay          100   18532.70 µs/op
+Flow (without sorting)         100   18731.43 µs/op
+Enum                            50   31283.36 µs/op
+Flow (with sorting)             10   105091.00 µs/op
+Pmap                             1   1213749.00 µs/op
+```
+
+The source code of the benchmarks is here: https://github.com/zeam-vm/pelemay_fp_benchmark
+
+
 ## Acknowledgement
 
 This research is supported by Adaptable and Seamless Technology transfer
