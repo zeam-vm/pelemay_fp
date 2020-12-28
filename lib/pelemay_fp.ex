@@ -26,20 +26,7 @@ defmodule PelemayFp do
   """
   @spec map(Enum.t(), (Enum.element() -> any()), pos_integer()) :: list()
   def map(enumerable, fun, threshold \\ 12000) do
-    pid = spawn(PelemayFp.Sub, :receive_result, [self()])
-
-    p_list =
-      PelemayFp.ParallelSplitter.split(
-        {PelemayFp.Sub, :sub_enum},
-        pid,
-        0,
-        enumerable,
-        threshold,
-        fun,
-        [:monitor]
-      )
-
-    send(pid, {:p_list, p_list})
+    spawn(PelemayFp.Sub, :map, [self(), enumerable, fun, threshold])
 
     receive do
       {:ok, result} -> result
@@ -64,34 +51,11 @@ defmodule PelemayFp do
   @spec map_chunk(Enum.t(), (Enum.element() -> any()), (Enum.t() -> Enum.t()), pos_integer()) ::
           list()
   def map_chunk(enumerable, fun, chunk_fun, threshold \\ 12000) do
-    pid = spawn(PelemayFp.Sub, :receive_result, [self()])
-
-    p_list =
-      PelemayFp.ParallelSplitter.split(
-        {PelemayFp.Sub, :sub_chunk},
-        pid,
-        0,
-        enumerable,
-        threshold,
-        {chunk_fun, fallback(enumerable, threshold, fun)},
-        [:monitor]
-      )
-
-    send(pid, {:p_list, p_list})
+    spawn(PelemayFp.Sub, :map_chunk, [self(), enumerable, fun, chunk_fun, threshold])
 
     receive do
       {:ok, result} -> result
       :error -> Enum.map(enumerable, fun)
-    end
-  end
-
-  @spec fallback(Enum.t(), pos_integer(), (Enum.element() -> any())) ::
-          (non_neg_integer() -> list())
-  defp fallback(enumerable, threshold, fun) do
-    fn id ->
-      enumerable
-      |> Enum.slice(id * threshold, threshold)
-      |> Enum.map(fun)
     end
   end
 end
