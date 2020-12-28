@@ -16,7 +16,7 @@ PelemayFp supports only Elixir v1.10 and Erlang/OTP 23+, currently, due to savin
 ```elixir
 def deps do
   [
-    {:pelemay_fp, "~> 0.1.0"}
+    {:pelemay_fp, "~> 0.1.2"}
   ]
 end
 ```
@@ -30,13 +30,15 @@ We conducted performance evaluation of PelemayFp, Pelemay, Flow, Enum and Pmap o
 ```
 ## PelemayFpBench
 benchmark name          iterations   average time 
-PelemayFp                      100   13917.93 µs/op
-Pelemay                        100   16863.28 µs/op
-PelemayFp and Pelemay          100   19023.99 µs/op
-Flow (without sorting)         100   19564.43 µs/op
-Enum                            50   31487.56 µs/op
-Flow (with sorting)             10   108537.60 µs/op
-Pmap                             2   864994.50 µs/op
+PelemayFp                      100   16138.54 µs/op
+Pelemay                        100   18533.75 µs/op
+Flow (without sorting)         100   20285.11 µs/op
+PelemayFp and Pelemay          100   20741.64 µs/op
+Enum                            50   31926.48 µs/op
+Stream                          50   40176.14 µs/op
+Flow (with sorting)             10   117144.20 µs/op
+Pmap                             2   586060.00 µs/op
+Task.async_stream                1   1097485.00 µs/op
 ```
 
 The source code of the benchmarks is here: https://github.com/zeam-vm/pelemay_fp_benchmark
